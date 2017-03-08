@@ -24,6 +24,534 @@ dojo.require("com.jke.AppController");
 dojo.addOnLoad( function() {
 	com.jke.AppController.reloadPage();
 	dojo.subscribe("/dojo/hashchange", this, com.jke.AppController.reloadPage);
+Code
+Issues 0
+Pull requests 0
+Projects 0
+Wiki
+Pulse
+Graphs
+Settings
+JKE_Banking/jke.war/artifacts/
+or cancel
+
+1
+
+<!DOCTYPE HTML>
+
+2
+
+<html>
+
+3
+
+<head>
+
+4
+
+<link rel="stylesheet" type="text/css" href="dijit/themes/dijit.css">
+
+5
+
+<link rel="stylesheet" type="text/css" href="dijit/themes/tundra/tundra.css">
+
+6
+
+<link rel="stylesheet" href="style/jkeweb.css" type="text/css">
+
+7
+
+<link rel="shortcut icon" HREF="favicon.jpg">
+
+8
+
+<title>JKE Banking</title>
+
+9
+
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+10
+
+<script type="text/javascript" djconfig="isDebug: false, parseOnLoad: true, baseUrl: 'dojo/', locale: 'en-us'" src="dojo/dojo.js"></script>
+
+11
+
+        
+
+12
+
+<script type="text/javascript">
+
+13
+
+dojo.require("dojo.parser");
+
+14
+
+dojo.require("dijit.layout.BorderContainer");
+
+15
+
+dojo.require("dijit.layout.ContentPane");
+
+16
+
+dojo.require("dijit.form.TextBox");
+
+17
+
+dojo.require("dijit.form.Button");
+
+18
+
+dojo.require("dijit.TitlePane");
+
+19
+
+dojo.require("dijit.form.Form");
+
+20
+
+​
+
+21
+
+dojo.registerModulePath("com.jke", "/com/jke");
+
+22
+
+dojo.require("com.jke.AppController");
+
+23
+
+​
+
+24
+
+dojo.addOnLoad( function() {
+
+25
+
+        com.jke.AppController.reloadPage();
+
+26
+
+        dojo.subscribe("/dojo/hashchange", this, com.jke.AppController.reloadPage);
+
+27
+
+        
+
+28
+
+        // wire up some actions
+
+29
+
+        dojo.connect(dojo.byId("loginButton"), "onclick",
+
+30
+
+                                dojo.hitch(this, function(event) {
+
+31
+
+                                        var name = dojo.byId("usernameBox").value;
+
+32
+
+                                        com.jke.AppController.login(name);
+
+33
+
+                                }));
+
+34
+
+        dojo.connect(dojo.byId("logoutButton"), "onclick",
+
+35
+
+                        com.jke.AppController.logout);
+
+36
+
+        dojo.connect(dojo.byId('dividendContLink'), "onclick",
+
+37
+
+                        com.jke.AppController.showDonationWizard);
+
+38
+
+        dojo.connect(dojo.byId('header'), "onclick",
+
+39
+
+                        dojo.hitch(this, function(event) {
+
+40
+
+                                com.jke.AppController.navigate({state: "accountSummary"});
+
+41
+
+                        }));
+
+42
+
+                        
+
+43
+
+        // only show the page after it is fully rendered
+
+44
+
+        dojo.style("mainLayout", "visibility", "visible");
+
+45
+
+});
+
+46
+
+</script>
+
+47
+
+</head>
+
+48
+
+<body class="tundra">
+
+49
+
+<div dojoType="dijit.layout.BorderContainer" id="mainLayout"
+
+50
+
+        design="headline" style="height: 100%; width: 1000px; visibility: hidden;" gutters="false">
+
+Code
+Issues 0
+Pull requests 0
+Projects 0
+Wiki
+Pulse
+Graphs
+Settings
+JKE_Banking/jke.war/artifacts/
+or cancel
+
+187
+
+​
+
+188
+
+        dojo.connect(dojo.byId('header'), "onclick",
+
+189
+
+​
+
+190
+
+39
+
+191
+
+​
+
+192
+
+                        dojo.hitch(this, function(event) {
+
+193
+
+​
+
+194
+
+40
+
+195
+
+​
+
+196
+
+                                com.jke.AppController.navigate({state: "accountSummary"});
+
+197
+
+​
+
+198
+
+41
+
+199
+
+​
+
+200
+
+                        }));
+
+201
+
+​
+
+202
+
+42
+
+203
+
+​
+
+204
+
+                        
+
+205
+
+​
+
+206
+
+43
+
+207
+
+​
+
+208
+
+        // only show the page after it is fully rendered
+
+209
+
+​
+
+210
+
+44
+
+211
+
+​
+
+212
+
+        dojo.style("mainLayout", "visibility", "visible");
+
+213
+
+​
+
+214
+
+45
+
+215
+
+​
+
+216
+
+});
+
+217
+
+​
+
+218
+
+46
+
+219
+
+​
+
+220
+
+</script>
+
+221
+
+​
+
+222
+
+47
+
+223
+
+​
+
+224
+
+</head>
+
+225
+
+​
+
+226
+
+48
+
+227
+
+​
+
+228
+
+<body class="tundra">
+
+229
+
+​
+
+230
+
+49
+
+231
+
+​
+
+232
+
+<div dojoType="dijit.layout.BorderContainer" id="mainLayout"
+
+233
+
+​
+
+234
+
+50
+
+235
+
+​
+
+236
+
+        design="headline" style="height: 100%; width: 1000px; visibility: hidden;" gutters="false">
+
+237
+
+​
+
+238
+
+​
+
+239
+
+        
+
+240
+
+        // wire up some actions
+
+241
+
+        dojo.connect(dojo.byId("loginButton"), "onclick",
+
+242
+
+                                dojo.hitch(this, function(event) {
+
+243
+
+                                        var name = dojo.byId("usernameBox").value;
+
+244
+
+                                        com.jke.AppController.login(name);
+
+245
+
+                                }));
+
+246
+
+        dojo.connect(dojo.byId("logoutButton"), "onclick",
+
+247
+
+                        com.jke.AppController.logout);
+
+248
+
+        dojo.connect(dojo.byId('dividendContLink'), "onclick",
+
+249
+
+                        com.jke.AppController.showDonationWizard);
+
+250
+
+        dojo.connect(dojo.byId('header'), "onclick",
+
+251
+
+                        dojo.hitch(this, function(event) {
+
+252
+
+                                com.jke.AppController.navigate({state: "accountSummary"});
+
+253
+
+                        }));
+
+254
+
+                        
+
+255
+
+        // only show the page after it is fully rendered
+
+256
+
+        dojo.style("mainLayout", "visibility", "visible");
+
+257
+
+});
+
+258
+
+</script>
+
+259
+
+</head>
+
+260
+
+<body class="tundra">
+
+261
+
+<div dojoType="dijit.layout.BorderContainer" id="mainLayout"
+
+262
+
+        design="headline" style="height: 100%; width: 1000px; visibility: hidden;" gutters="false">
+
+
+
 	
 	// wire up some actions
 	dojo.connect(dojo.byId("loginButton"), "onclick",
@@ -128,7 +656,7 @@ dojo.addOnLoad( function() {
 			<li><a href="#">Branch Locator</a></li>
 		</ul>
 	</div>
-	<div id="boilerplate">Copyright 2030, IBM</div>
+	<div id="boilerplate">Copyright 2031, IBM</div>
 </div>
 </div>
 
